@@ -80,8 +80,13 @@ aside ul {
  
 aside ul a {
   text-decoration: none;
+  font-weight: 300;
+  color: rgba(24, 104, 224, 0.788);
 }
-
+.number {
+  font-weight: 300;
+  color: rgba(24, 104, 224, 0.788);
+}
 
 /*=======================================
   main 

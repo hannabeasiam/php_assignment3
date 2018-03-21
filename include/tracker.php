@@ -1,75 +1,31 @@
 <?php 
-  //get id
   session_start();
+  $current_url = $_SERVER['REQUEST_URI']; //request current url from server
+  $cFile = pathinfo($current_url,PATHINFO_FILENAME); //get filename
+  if ($cFile == 'php_assignment3') {
+    $cFile = 'index';
+  }
+  echo $cFile;
   $total_count = 0;
-  $page_count = array();
-  //if session id not exist, create session id
-  if(!isset($_SESSION['id'])) {
-    $_SESSION['id'] = session_id();
+  //if session not exist, create session 
+  if(!isset($_SESSION['counter'][$cFile])) {
+    $_SESSION['counter'][$cFile] = 1;
   } else {
-    $total_count = 1;
-    $visited_page = array();
-    $page_count = array();
-    $last_page = end($visited_page);
-    $current_url = $_SERVER['REQUEST_URI']; //request current url from server
-    $current_filename = pathinfo($current_url,PATHINFO_FILENAME); //get filename
-    echo($current_filename);
-    if ($last_page !== $current_filename) {
-      array_push($visited_page, $current_filename);
-    } else {
-      echo 'refresh';
-    } 
-    echo "<br/>";
-    var_dump($visited_page);
-
-  } 
-  
-  
-
-
-  
-  
- 
-  //
-  /*
-  function tracker(&$total_count, &$page_count, $title) {
-    $total_count = $GLOBALS['total_count'];
-    $page_count = $GLOBALS['page_count'];
-    $total_count = $total_count + 1;
-    if(isset($title)) {
-      $i = 0;
-      switch ($title) {
-        case 'Home':
-          $page_count[$title]['count'] = $i++;
-
-      }
-
-    } else {echo 'check title';}
-    
+    $_SESSION['counter'][$cFile]++;
   }
-  
-tracker class
-class tracker {
-  private $id;
-  private $total_count;
-  private $page_path;
-
-  public function __construct($id, $total_count, $page_path) {
-    $this-> id = $id;
-    $this-> total_count = $total_count;
-    $this-> page_path = $page_path;
+  $total = $_SESSION['counter'];
+  foreach($total as $key => $value) {
+    $total_count += $value;
   }
-
-}*/
 ?>
 <aside>
   <ul>
     <li>Total Visited Page</li>
-    <li>XX</li>
-    <li>Home <span> <?php ?><span></li>
-    <li>Assignment1 <span><?php ?><span></li>
-    <li>Assignment2 <span>XX<span></li>
-    <li>Assignment3 <span>XX<span></li>
-    <li>Assignment4 <span>XX<span></li>
+    <li><?php if(isset($total)) { echo ($total_count); } ?></li>
+    <li>Home <span class="number"><?php if(isset($_SESSION['counter']['index'])) { echo $_SESSION['counter']['index']; } ?><span></li>
+    <li>Assignment1 <span class="number"><?php  if(isset($_SESSION['counter']['assignment1'])) { echo $_SESSION['counter']['assignment1']; } ?><span></li>
+    <li>Assignment2 <span class="number"><?php if(isset($_SESSION['counter']['assignment2'])) { echo $_SESSION['counter']['assignment2']; } ?><span></li>
+    <li>Assignment3 <span class="number"><?php if(isset($_SESSION['counter']['assignment3'])) { echo $_SESSION['counter']['assignment3']; } ?><span></li>
+    <li>Assignment4 <span class="number"><?php if(isset($_SESSION['counter']['assignment4'])) { echo $_SESSION['counter']['assignment4']; } ?><span></li>
   </ul>
 </aside>
