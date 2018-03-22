@@ -40,7 +40,7 @@
         <td><span class="error"><?php if (isset($NameError)) echo $NameError; ?></span></td>
       </tr>
       <tr>
-        <th><label for="email">Group Name</label></th>
+        <th><label for="email">Email</label></th>
         <td><input type="email" id="email" name="email" value="<?php if (isset($email)) echo $email; ?>"/></td>
         <td><span class="error"><?php if (isset($emailError)) echo $emailError; ?></span></td>
       </tr>
@@ -63,23 +63,27 @@
       require_once 'Mail.php';
       //simple smtp server
       $options = array();
-      $options['host'] = 'php@localhost';
+      $options['host'] = 'smtp.gmail.com';
+      $options['port'] = '465';
+      $options['auth'] = 'true';
+      $options['username'] = 'hannabeasiam@gmail.com';
+      $options['password'] = 'XXXXX';
       //create mailer object
       $mailer = Mail::factory('smtp',$options);
       //send message
       $headers = array();
-      $headers['From'] = 'php@localhost';
-      $headers['To'] = $email;
+      $headers['From'] = "Hanna Lee <hannabeasiam@gmail.com>";
+      $headers['To'] = $_POST['email'];
       $headers['Subject'] = 'Your Visited Page';
       //set recipient list
-      $recipients = $email;
+      $recipients =  $_POST['email'];
       $body = 'This is a visited pages from PHP study site';
       //$message = include_once("include/tracker.php");
       $result = $mailer->send($recipients,$headers,$body);
       //check result and display error if exit
       if (PEAR::isError($result)) {
-        $error = 'Error sending emai: ' .$result->getMessage();
-        echo($error);
+        $result->getMessage();
+        
       }
       $headers['Content-type'] = 'text/html';
 
