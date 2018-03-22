@@ -80,8 +80,13 @@ aside ul {
  
 aside ul a {
   text-decoration: none;
+  font-weight: 300;
+  color: rgba(24, 104, 224, 0.788);
 }
-
+.number {
+  font-weight: 300;
+  color: rgba(24, 104, 224, 0.788);
+}
 
 /*=======================================
   main 
@@ -109,6 +114,9 @@ h2 {
 .coursePage{
   background-color: rgba(216, 187, 171, 0.788);
   
+}
+.asign3 {
+  background-color: rgba(71, 90, 105, 0.788);
 }
 form {
   margin: 0;
