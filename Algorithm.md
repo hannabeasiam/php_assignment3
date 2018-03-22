@@ -15,3 +15,17 @@ assignment4.php
 
 ## Visitor Track
 - diaplay number of times the page has been visited
+
+## Email
+```
+- prompt user name
+- primpt user email
+
+- once user submit,  post & validate
+
+  if (name is empty) set nameError
+  if (email is empty) set emailError
+
+
+
+```
