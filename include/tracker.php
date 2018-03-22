@@ -5,7 +5,7 @@
   if ($cFile == 'php_assignment3') {
     $cFile = 'index';
   }
-  echo $cFile;
+  //echo $cFile;
   $total_count = 0;
   //if session not exist, create session 
   if(!isset($_SESSION['counter'][$cFile])) {
